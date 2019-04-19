@@ -3,13 +3,13 @@ const community = {
     test: 'community'
   },
   mutations: {
-    
+
   },
   actions: {
-    
+
   },
   getters: {
-    
+
   }
 }
 export default community

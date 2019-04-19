@@ -9,7 +9,7 @@ const home = {
 
   },
   getters: {
-    
+
   }
 }
 export default home
