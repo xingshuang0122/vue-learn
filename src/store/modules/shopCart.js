@@ -1,4 +1,5 @@
 const shopCart = {
+  namespaced: true,
   state: {
     test: 'shopCart'
   },

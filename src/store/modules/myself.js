@@ -1,4 +1,5 @@
 const myself = {
+  namespaced: true,
   state: {
     test: 'myself'
   },

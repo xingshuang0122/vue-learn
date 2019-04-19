@@ -1,4 +1,5 @@
 const community = {
+  namespaced: true,
   state: {
     test: 'community'
   },
