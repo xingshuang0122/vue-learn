@@ -19,7 +19,6 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.6.0",
     "@vue/cli-plugin-eslint": "^3.6.0",
-    "@vue/cli-plugin-pwa": "^3.6.0",
     "@vue/cli-plugin-unit-jest": "^3.6.0",
     "@vue/cli-service": "^3.6.0",
     "@vue/eslint-config-standard": "^4.0.0",
@@ -29,7 +28,7 @@
     "babel-jest": "^23.6.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.9.0",
+    "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "vue-cli-plugin-moment": "^0.1.1",
     "vue-lazyload": "^1.2.6",
