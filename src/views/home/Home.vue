@@ -17,21 +17,28 @@
           <swipe-pic :images="content.lunbo.home"></swipe-pic>
           <active :spec="specs[0]" :titleList="content.active.tuijian_title" :imageList="content.imageList" :dayList="content.active.days"></active>
         </van-tab>
-        <van-tab title="时尚">内容 2</van-tab>
+        <van-tab title="时尚">
+          <active :spec="specs[1]" :titleList="content.active.shishang_title" :imageList="content.shishangImglist" :dayList="content.active.days"></active>
+        </van-tab>
         <van-tab title="美妆">
           <swipe-pic :images="content.lunbo.meizhuang"></swipe-pic>
+          <active :spec="specs[2]" :titleList="content.active.meizhuang_title" :imageList="content.meizhuangImglist" :dayList="content.active.days"></active>
         </van-tab>
         <van-tab title="家电">
           <swipe-pic :images="content.lunbo.jiadian"></swipe-pic>
+          <active :spec="specs[3]" :titleList="content.active.jiadian_title" :imageList="content.jiadianImglist" :dayList="content.active.days"></active>
         </van-tab>
         <van-tab title="家居">
           <swipe-pic :images="content.lunbo.jiaju"></swipe-pic>
+          <active :spec="specs[4]" :titleList="content.active.jiaju_title" :imageList="content.jiajuImglist" :dayList="content.active.days"></active>
         </van-tab>
         <van-tab title="国际">
           <swipe-pic :images="content.lunbo.guoji"></swipe-pic>
+          <active :spec="specs[5]" :titleList="content.active.guoji_title" :imageList="content.guojiImglist" :dayList="content.active.days"></active>
         </van-tab>
         <van-tab title="生活">
           <swipe-pic :images="content.lunbo.shenghuo"></swipe-pic>
+          <active :spec="specs[6]" :titleList="content.active.shenghuo_title" :imageList="content.shenghuoImglist" :dayList="content.active.days"></active>
         </van-tab>
       </van-pull-refresh>
     </van-tabs>

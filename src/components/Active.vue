@@ -2,7 +2,7 @@
   <div>
     <p>{{spec}}</p>
     <!-- 懒加载  瀑布流-->
-    <lazy-component class="lazys" v-waterfall-lower="loadMore" waterfall-disabled="disabled" waterfall-offset="300">
+    <!-- <lazy-component class="lazys" v-waterfall-lower="loadMore" waterfall-disabled="disabled" waterfall-offset="300"> -->
       <van-row v-for="(img,index) in imageList" :key="index">
         <img v-lazy="img" alt="" class="img-display">
         <van-col span="16">
@@ -12,12 +12,12 @@
           <span class="remain-time">剩余{{dayList[index]}}天</span>
         </van-col>
       </van-row>
-    </lazy-component>
+    <!-- </lazy-component> -->
   </div>
 </template>
 
 <script>
-import { Waterfall } from 'vant'
+// import { Waterfall } from 'vant'
 // import lazyComponent from 'vue-lazyload'
 export default {
   props: {
@@ -45,7 +45,10 @@ export default {
   },
   directives: {
     // 瀑布流
-    WaterfallLower: Waterfall('lower')
+    // WaterfallLower: Waterfall('lower')
+  },
+  created(){
+    console.log(this.imageList)
   },
   methods: {
     // 瀑布流方法
