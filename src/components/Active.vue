@@ -3,7 +3,8 @@
     <p>{{spec}}</p>
     <!-- 懒加载  瀑布流-->
     <!-- <lazy-component class="lazys" v-waterfall-lower="loadMore" waterfall-disabled="disabled" waterfall-offset="300"> -->
-      <van-row v-for="(img,index) in imageList" :key="index">
+    <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+      <van-cell v-for="(img,index) in imageList" :key="index">
         <img v-lazy="img" alt="" class="img-display">
         <van-col span="16">
           <h4>{{titleList[index]}}</h4>
@@ -11,7 +12,8 @@
         <van-col span="8">
           <span class="remain-time">剩余{{dayList[index]}}天</span>
         </van-col>
-      </van-row>
+      </van-cell>
+    </van-list>
     <!-- </lazy-component> -->
   </div>
 </template>
@@ -40,28 +42,33 @@ export default {
   },
   data() {
     return {
-      disabled: false
+      disabled: false,
+      loading: false,
+      finished: false
     }
   },
   directives: {
     // 瀑布流
     // WaterfallLower: Waterfall('lower')
   },
-  created(){
-    console.log(this.imageList)
+  created() {
+    // console.log(this.imageList)
   },
   methods: {
     // 瀑布流方法
-    loadMore() {
+    onLoad() {
       console.log('触发')
-      this.disabled = true
+      // this.disabled = true
       setTimeout(() => {
         for (let i = 0; i < 10; i++) {
           this.imageList.push(this.imageList[i])
           this.titleList.push(this.titleList[i])
           this.dayList.push(this.dayList[i])
         }
-        this.disabled = false
+        this.loading = false
+        if (this.imageList.length >= 40) {
+          this.finished = true
+        }
       }, 500)
     }
   }
