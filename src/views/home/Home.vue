@@ -98,6 +98,7 @@ export default {
       let socket = new SockJS('http://127.0.0.1:8090/endpointNasus')
       // 获取STOMP子协议的客户端对象
       this.stompClient = Stomp.over(socket)
+      this.stompClient.debug = null
       // 定义客户端的认证信息,按需求配置
       let headers = {
         Authorization: ''
