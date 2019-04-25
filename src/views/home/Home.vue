@@ -50,6 +50,8 @@
 import { mapState } from 'vuex'
 import SwipePic from '../../components/SwipePic'
 import Active from '../../components/Active'
+import SockJS from 'sockjs-client'
+import Stomp from 'stompjs'
 export default {
   components: {
     SwipePic,
@@ -62,7 +64,8 @@ export default {
       // 该页面的所有数据
       content: null,
       // 是否加载中
-      isLoading: false
+      isLoading: false,
+      stompClient: null
     }
   },
   computed: {
@@ -79,6 +82,7 @@ export default {
   },
   mounted() {
     console.log(this.specs)
+    this.initWebsocket()
   },
   methods: {
     // 刷新页面
@@ -88,6 +92,24 @@ export default {
         this.isLoading = false
         this.count++
       }, 500)
+    },
+    initWebsocket() {
+      // 建立连接对象
+      let socket = new SockJS('http://127.0.0.1:8090/endpointNasus')
+      // 获取STOMP子协议的客户端对象
+      this.stompClient = Stomp.over(socket)
+      // 定义客户端的认证信息,按需求配置
+      let headers = {
+        Authorization: ''
+      }
+      this.stompClient.connect(headers, () => {
+        console.log('connected')
+        this.stompClient.subscribe('/nasus/getResponse', msg => {
+          console.log(msg)
+        })
+      }, error => {
+        console.log('fail' + error)
+      })
     }
   }
 }
