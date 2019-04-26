@@ -95,17 +95,17 @@ export default {
     },
     initWebsocket() {
       // 建立连接对象
-      let socket = new SockJS('http://127.0.0.1:8090/endpointNasus')
+      let socket = new SockJS('http://127.0.0.1:8090/sensor-setting/webSocketServer')
       // 获取STOMP子协议的客户端对象
       this.stompClient = Stomp.over(socket)
-      this.stompClient.debug = null
+      // this.stompClient.debug = null
       // 定义客户端的认证信息,按需求配置
       let headers = {
         Authorization: ''
       }
       this.stompClient.connect(headers, () => {
         console.log('connected')
-        this.stompClient.subscribe('/nasus/getResponse', msg => {
+        this.stompClient.subscribe('/topic/automatic/assembly/module', msg => {
           console.log(msg)
         })
       }, error => {
