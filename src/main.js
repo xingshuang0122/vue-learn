@@ -6,6 +6,7 @@ import axios from 'axios'
 import vant from 'vant'
 import 'vant/lib/index.css'
 import VueLazyLoad from 'vue-lazyload'
+import mqtt from 'mqtt'
 // import stompjs from 'stompjs'
 // import sockjs from 'sockjs'
 
@@ -15,6 +16,7 @@ Vue.use(VueLazyLoad, {
 })
 Vue.use(vant)
 Vue.prototype.$axios = axios
+Vue.prototype.$mqtt = mqtt
 // Vue.prototype.$stompjs = stompjs
 // Vue.prototype.$sockjs = sockjs
 

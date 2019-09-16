@@ -11,6 +11,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "mqtt": "^3.0.0",
     "sockjs-client": "^1.3.0",
     "stompjs": "^2.3.3",
     "vant": "^1.6.14",

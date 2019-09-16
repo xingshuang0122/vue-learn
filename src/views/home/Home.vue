@@ -18,11 +18,21 @@
           <active :spec="specs[0]" :titleList="content.active.tuijian_title" :imageList="content.imageList" :dayList="content.active.days"></active>
         </van-tab>
         <van-tab title="时尚">
-          <active :spec="specs[1]" :titleList="content.active.shishang_title" :imageList="content.shishangImglist" :dayList="content.active.days"></active>
+          <active
+            :spec="specs[1]"
+            :titleList="content.active.shishang_title"
+            :imageList="content.shishangImglist"
+            :dayList="content.active.days"
+          ></active>
         </van-tab>
         <van-tab title="美妆">
           <swipe-pic :images="content.lunbo.meizhuang"></swipe-pic>
-          <active :spec="specs[2]" :titleList="content.active.meizhuang_title" :imageList="content.meizhuangImglist" :dayList="content.active.days"></active>
+          <active
+            :spec="specs[2]"
+            :titleList="content.active.meizhuang_title"
+            :imageList="content.meizhuangImglist"
+            :dayList="content.active.days"
+          ></active>
         </van-tab>
         <van-tab title="家电">
           <swipe-pic :images="content.lunbo.jiadian"></swipe-pic>
@@ -38,7 +48,12 @@
         </van-tab>
         <van-tab title="生活">
           <swipe-pic :images="content.lunbo.shenghuo"></swipe-pic>
-          <active :spec="specs[6]" :titleList="content.active.shenghuo_title" :imageList="content.shenghuoImglist" :dayList="content.active.days"></active>
+          <active
+            :spec="specs[6]"
+            :titleList="content.active.shenghuo_title"
+            :imageList="content.shenghuoImglist"
+            :dayList="content.active.days"
+          ></active>
         </van-tab>
       </van-pull-refresh>
     </van-tabs>
@@ -65,7 +80,8 @@ export default {
       content: null,
       // 是否加载中
       isLoading: false,
-      stompClient: null
+      stompClient: null,
+      mqttClient: null
     }
   },
   computed: {
@@ -80,11 +96,35 @@ export default {
         console.log(error)
       })
   },
+  beforeDestroy() {
+    this.closeMqtt()
+  },
   mounted() {
     console.log(this.specs)
-    this.initWebsocket()
+    // this.initWebsocket()
+    this.initMqtt()
   },
   methods: {
+    initMqtt() {
+      this.mqttClient = this.$mqtt.connect('ws://192.168.0.233:61614')
+      // this.mqttClient = this.$mqtt.connect('mqtt://192.168.0.233:1883')
+      this.mqttClient.on('connect', () => {
+        this.mqttClient.subscribe('sensor-device-data-all')
+        console.log(this.mqttClient)
+      })
+      this.mqttClient.on('error', () => console.log('error'))
+      this.mqttClient.on('close', () => console.log('close'))
+      this.mqttClient.on('message', (topic, message) => {
+        console.log(message.toString())
+      })
+    },
+    closeMqtt() {
+      if (this.mqttClient != null) {
+        console.log(this.mqttClient)
+        this.mqttClient.end()
+        console.log(this.mqttClient)
+      }
+    },
     // 刷新页面
     onRefresh() {
       setTimeout(() => {
